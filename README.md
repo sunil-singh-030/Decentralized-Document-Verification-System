@@ -39,7 +39,11 @@ InstaVerify is a document verification platform where you can upload and verify 
   
 # Demo
  **RegisterInstitute**
-https://github.com/user-attachments/assets/22870dfd-8db6-42c7-9ef0-cd8813a926cb
+<video width="600" controls>
+  <source src="https://user-images.githubusercontent.com/https://github.com/sunil-singh-030/Decentralized-Document-Verification-System/issues/1/your-video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 
 
   
