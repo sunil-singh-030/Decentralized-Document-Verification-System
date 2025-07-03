@@ -39,9 +39,15 @@ InstaVerify is a document verification platform where you can upload and verify 
   
 # Demo
  **RegisterInstitute**
-<video width="600" controls>
-  <source src="https://user-images.githubusercontent.com/https://github.com/sunil-singh-030/Decentralized-Document-Verification-System/issues/1/your-video.mp4" type="video/mp4">
-</video>
+<p align="center">
+  <video width="600" controls>
+    <source src="[https://user-images.githubusercontent.com/your-full-link.mp4](https://private-user-images.githubusercontent.com/219081995/462017552-27b0ec8e-6a2c-4d41-89f0-64a1ca2a34e3.mp4?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTE1NDU1NjEsIm5iZiI6MTc1MTU0NTI2MSwicGF0aCI6Ii8yMTkwODE5OTUvNDYyMDE3NTUyLTI3YjBlYzhlLTZhMmMtNGQ0MS04OWYwLTY0YTFjYTJhMzRlMy5tcDQ_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUwNzAzJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MDcwM1QxMjIxMDFaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT05YmRhZDVhMWM4OTBjZTg4NzY4NmI5ODk5OTI0NWJiZDFhNTJiZjlhOTk0YzlmZWU3NjE1MzczYzA2NWQyOGMzJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.XT32tvhO2NpZzJDppucO4kZC2WTGx80yKXVvEDRZVDU)" type="video/mp4">
+  </video>
+</p>
+
+
+
+
 
 
 
