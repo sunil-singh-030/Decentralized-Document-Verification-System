@@ -1,0 +1,96 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("pimg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+}
+/* Navbar */
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+#projectname{
+    margin-left: 4%;
+    font-size: 25px;
+    color: rgb(16, 55, 11);
+    font-weight: bold;
+}
+.pageconatiner{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+.page{
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+    border-radius: 19px;
+}
+.page:hover{
+    background-color: black;
+    color : white;
+}
+
+#bulbon{
+    position: relative;  /* or use absolute if you want it inside a container */
+    top: 16%px;
+    left : 25px;
+    width: 40px;
+    cursor: pointer;
+    z-index: 999; /* Make sure it stays on top */
+}
+
+/* form */
+.getdocs{
+    border: 3px solid rgb(97, 92, 92);
+    box-shadow: 5px 5px 5px rgb(72, 65, 65);
+    width: 300px;
+    margin: 100px auto 0 auto; /* auto -> calculates rest margin automatically */
+    background-color: lightblue;
+    padding: 1.5rem;  /* space b/w content and element */
+    /* text-align: center; */
+}
+.inputfield{
+    display: block;
+    margin-bottom: 20px;
+}
+#info{
+    text-align: center;
+}
+#button{
+    font-weight: bold;
+    background-color: yellow;
+    border: 1px solid rgb(35, 35, 35);
+    display: block;
+    margin : 0 auto;
+    border-radius: 5px;
+}
+#button:hover{
+    transform: scale(1.2);
+}
+.hidden{
+    display : none;
+}
+#otpbutton{
+    font-weight: bold;
+    background-color: yellow;
+    border: 1px solid rgb(35, 35, 35);
+    display: block;
+    margin : 0 auto;
+    border-radius: 5px;
+}
+#otpbutton:hover{
+    transform: scale(1.2);
+}
+#otp{
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+    width: 100px;
+}

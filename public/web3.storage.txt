@@ -1,0 +1,31 @@
+🚀 What is Web3.Storage?
+Web3.Storage is a service that lets you store files on IPFS (InterPlanetary File System) easily using a simple API. It takes care of uploading, pinning, and retrieving your files — all in a decentralized and browser-friendly way.
+
+🔧 How it Works (in short):
+You upload a file using JavaScript (e.g., from a web app).
+
+Web3.Storage generates a CID (Content Identifier) for that file.
+
+Your file is stored on IPFS + Filecoin, and can be accessed via public gateways (like https://CID.ipfs.w3s.link/).
+
+🧠 Why Use It?
+No need to run your own IPFS node
+
+Safe to use in frontend (API key, no secret)
+
+Automatically pins files (they won’t disappear)
+
+Works with any file: PDFs, images, JSON, etc.
+
+Ideal for dApps, NFT metadata, certificate storage (like your InstaVerify)
+
+🔗 Example:
+js
+Copy code
+const client = new Web3Storage({ token: 'YOUR_API_TOKEN' });
+const cid = await client.put([file]);
+console.log('CID:', cid); // Use this CID to access file from IPFS
+✅ Summary:
+Web3.Storage = Easiest way to store files on IPFS using JavaScript. Free, reliable, and perfect for web apps and blockchain projects.
+
+

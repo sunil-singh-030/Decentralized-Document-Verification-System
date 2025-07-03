@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="Home.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div style="display: flex;align-items: center;gap: 20px;">
+            <img src="bulbon.png" id="bulbon" alt="" width="40px" height="40px" onclick="changeBg()" >
+            <h1 id="projectname" style="display: inline;">InstaVerify</h1>
+        </div>
+        
+        <div class="pageconatiner">
+            <a href="Home.html" class="page">Home</a>
+            <a href="GetDocs.html" class="page">GetDocs</a>
+            <a href="VerifyDocs.html" class="page">VerifyDocs</a>
+            <a href="RegisterInstitute.html" class="page">RegisterInstitute</a>
+            <a href="UploadDocs.html" class="page">UploadDocs</a>
+        </div>
+    </div>
+    
+    <div class="wrap">
+
+        <div class="welcomemsg">Welcome to InstaVerify !</div>
+        <h3 id="tagline">"Instantly Verified. Infinitely Trusted"</h3>
+        <p id="description">InstaVerify uses Blockchain technology to ensure academic credentials are stored <br> and verified in a secure and transparent way. The aim is to prevent <br> fraud and make sure all certificates and degrees are authentic and legit.</p>
+        
+        <div class="button-people">
+            <button class="button"><a href="GetDocs.html" class="button-link">Student</a></button>
+            <button class="button"><a href="VerifyDocs.html" class="button-link">Verifier</a></button>
+            <button class="button"><a href="UploadDocs.html" class="button-link">College</a></button>
+        </div>
+    </div>
+    <script src="Home.js"></script>
+    <script src="chnagebg.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+# Difference between class, id, tag
+1 id :- symbol (#id_name) , for single element
+2 class :- symbol(.class_name) , for multiple items
+3 tag :- symbol(div, h1 etc)
+
+# Difference between margin and padding 
+1 margin :- space outside then element
+2 padding :- space between border of element and its content
+
+# Types of element :-
+1 Block : takes full space. ex -> div,h1,p
+2 Inline : as much as required. ex -> span,a,img
+
+# Async Function
+    ✅ What is an async function in JavaScript?
+    An async function allows you to write asynchronous (non-blocking) code using a syntax that looks synchronous and easy to read.
+
+    🚀 Why use async?
+    To wait for promises (e.g., API calls, file uploads) without blocking the rest of the code.
+
+    Makes code cleaner than using .then() chains.
+
+    Allows using await inside it to pause execution until a promise resolves.
+
+    🔄 How does it work (in short)?
+    You define a function as async.
+
+    Inside it, you can use await to pause execution until a Promise settles.
+
+    The function always returns a Promise.
+
+    📘 Basic Example:
+    javascript
+    Copy code
+    async function fetchData() {
+        let response = await fetch("https://api.example.com/data");
+        let data = await response.json();
+        console.log(data);
+    }
+
+    fetchData();
+    🔍 What happens:
+    fetchData() is called.
+
+    fetch(...) returns a Promise.
+
+    await pauses fetchData() until the Promise resolves.
+
+    Then the JSON is extracted and logged.
+
+    ⏱ Without async/await (same thing, but uglier):
+    javascript
+    Copy code
+    fetch("https://api.example.com/data")
+    .then(res => res.json())
+    .then(data => console.log(data));
+    ✅ Summary:
+    Feature	Description
+    async	Marks a function that returns a Promise.
+    await	Pauses the function until the Promise is resolved.
+    Use Case	API calls, time delays, file uploads, etc.
+    Benefit	Cleaner, readable, step-by-step flow for async code.
+# Link for email part
+
+

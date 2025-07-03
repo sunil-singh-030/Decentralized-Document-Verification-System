@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="RegisterInstitute.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="navbar">
+        <div style="display: flex;align-items: center;gap: 20px;">
+            <img src="bulbon.png" id="bulbon" alt="" width="40px" height="40px" onclick="changeBg()" >
+            <h1 id="projectname" style="display: inline;">InstaVerify</h1>
+        </div>
+        
+        <div class="pageconatiner">
+            <a href="Home.html" class="page">Home</a>
+            <a href="GetDocs.html" class="page">GetDocs</a>
+            <a href="VerifyDocs.html" class="page">VerifyDocs</a>
+            <a href="RegisterInstitute.html" class="page">RegisterInstitute</a>
+            <a href="UploadDocs.html" class="page">UploadDocs</a>
+        </div>
+    </div>
+    <div class="regclg">
+        <h2 id="info">Enter College's Details</h2>
+        <div class="inputfield">
+            <label for="clgname" >Name : </label>
+            <input type="text" name="clgname" id="clgname"> <br>
+        </div>
+        <div class="inputfield">
+            <label for="wltaddr" >Wallet Address : </label>
+            <input type="text"  name="wltaddr" id="wltaddr">
+        </div>
+        <button id="button" onclick="registerInstitute()">Register</button>
+    </div>
+    <script src="RegisterInstitute.js"></script>
+    <script src="chnagebg.js"></script>
+</body>
+</html>
