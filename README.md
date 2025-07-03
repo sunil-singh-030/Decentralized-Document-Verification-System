@@ -38,7 +38,9 @@ InstaVerify is a document verification platform where you can upload and verify 
   •	**File Storage:** IPFS via Pinata.
   
 # Demo
+  [![Watch the video](https://img.youtube.com/vi/P50s0fgwrqw/0.jpg)](https://www.youtube.com/watch?v=P50s0fgwrqw)
   
+
 
 
 
