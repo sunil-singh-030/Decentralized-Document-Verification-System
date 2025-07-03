@@ -39,11 +39,11 @@ InstaVerify is a document verification platform where you can upload and verify 
   
 # Demo
  **RegisterInstitute**
-<p align="center">
-  <video width="600" controls>
-    <source src="https://user-images.githubusercontent.com/your-full-link.mp4](https://private-user-images.githubusercontent.com/219081995/462017552-27b0ec8e-6a2c-4d41-89f0-64a1ca2a34e3.mp4" type="video/mp4">
-  </video>
-</p>
+![Alt Text](
+
+https://github.com/user-attachments/assets/789e1c13-0cdf-4a0d-b6ce-2f6d4dd24f85
+
+)
 
 
 
