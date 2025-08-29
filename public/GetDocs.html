@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -43,5 +43,70 @@
     
     <script src="GetDocs.js"></script>
     <script src="chnagebg.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Documents - InstaVerify</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="Home.css"> 
+    <link rel="stylesheet" href="GetDocs.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" defer></script>
+    <script src="chnagebg.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="bulbon.png" id="theme-toggle" alt="Toggle dark/light mode" width="40" height="40" onclick="chnageBg()">
+            <h1 id="projectname">InstaVerify</h1>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="Home.html" class="page">Home</a>
+            <a href="GetDocs.html" class="page active">Get Docs</a>
+            <a href="VerifyDocs.html" class="page">Verify</a>
+            <a href="RegisterInstitute.html" class="page">Register</a>
+            <a href="UploadDocs.html" class="page">Upload</a>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <div class="form-container">
+            <form id="student-form">
+                <h2>Enter Student Details</h2>
+                <div class="form-group">
+                    <label for="stdname">Student Name</label>
+                    <input type="text" name="stdname" id="stdname" placeholder="e.g., John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="rollno">Roll Number</label>
+                    <input type="number" name="rollno" id="rollno" placeholder="e.g., 12345" required>
+                </div>
+                <button type="submit" class="button primary" id="submit-btn">Get Documents</button>
+            </form>
+
+            <form id="otp-form" class="hidden">
+                <h2>Verify OTP</h2>
+                 <p class="otp-info">An OTP has been sent to the registered email.</p>
+                <div class="form-group">
+                    <label for="otp">Enter 6-Digit OTP</label>
+                    <input type="number" name="otp" id="otp" placeholder="_ _ _ _ _ _" required>
+                </div>
+                <button type="submit" class="button primary" id="otp-btn">Verify & Proceed</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="GetDocs.js"></script>
 </body>
 </html>

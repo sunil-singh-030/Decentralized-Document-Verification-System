@@ -3,39 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>InstaVerify | Secure Document Verification</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="Home.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" defer></script>
+    <script src="chnagebg.js"></script>
 </head>
 <body>
-    <div class="navbar">
-        <div style="display: flex;align-items: center;gap: 20px;">
-            <img src="bulbon.png" id="bulbon" alt="" width="40px" height="40px" onclick="changeBg()" >
-            <h1 id="projectname" style="display: inline;">InstaVerify</h1>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="bulbon.png" id="theme-toggle" alt="Toggle dark/light mode" width="40" height="40">
+            <h1 id="projectname">InstaVerify</h1>
         </div>
         
-        <div class="pageconatiner">
-            <a href="Home.html" class="page">Home</a>
-            <a href="GetDocs.html" class="page">GetDocs</a>
-            <a href="VerifyDocs.html" class="page">VerifyDocs</a>
-            <a href="RegisterInstitute.html" class="page">RegisterInstitute</a>
-            <a href="UploadDocs.html" class="page">UploadDocs</a>
-        </div>
-    </div>
+        <nav class="nav-links">
+            <a href="Home.html" class="page active">Home</a>
+            <a href="GetDocs.html" class="page">Get Docs</a>
+            <a href="VerifyDocs.html" class="page">Verify</a>
+            <a href="RegisterInstitute.html" class="page">Register</a>
+            <a href="UploadDocs.html" class="page">Upload</a>
+        </nav>
+    </header>
     
-    <div class="wrap">
-
-        <div class="welcomemsg">Welcome to InstaVerify !</div>
-        <h3 id="tagline">"Instantly Verified. Infinitely Trusted"</h3>
-        <p id="description">InstaVerify uses Blockchain technology to ensure academic credentials are stored <br> and verified in a secure and transparent way. The aim is to prevent <br> fraud and make sure all certificates and degrees are authentic and legit.</p>
+    <main class="hero-section">
+        <h2 class="welcome-msg">Welcome to InstaVerify!</h2>
+        <p id="tagline">"Instantly Verified. Infinitely Trusted."</p>
+        <p id="description">
+            Leveraging Blockchain technology to ensure academic credentials are stored and verified in a secure, transparent, and tamper-proof way.
+        </p>
         
-        <div class="button-people">
-            <button class="button"><a href="GetDocs.html" class="button-link">Student</a></button>
-            <button class="button"><a href="VerifyDocs.html" class="button-link">Verifier</a></button>
-            <button class="button"><a href="UploadDocs.html" class="button-link">College</a></button>
+        <div class="button-group">
+            <a href="GetDocs.html" class="button primary">I'm a Student</a>
+            <a href="VerifyDocs.html" class="button secondary">I'm a Verifier</a>
+            <a href="UploadDocs.html" class="button secondary">I'm an Institute</a>
         </div>
-    </div>
-    <script src="Home.js"></script>
-    <script src="chnagebg.js"></script>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>

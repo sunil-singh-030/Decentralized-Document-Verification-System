@@ -1,0 +1,126 @@
+/* --- Styles for the Admin Dashboard --- */
+
+.dashboard-content {
+    padding: 120px 5% 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Admin Authentication Layer */
+#admin-auth-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.auth-box {
+    padding: 2rem;
+    background-color: var(--navbar-bg);
+    color: var(--text-color);
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: var(--card-shadow);
+}
+.auth-box.error {
+    color: #721c24;
+    background-color: #f8d7da;
+}
+
+.dashboard-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.dashboard-header h1 {
+    color: var(--heading-color);
+    font-size: 2.5rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background-color: var(--navbar-bg);
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+}
+body.dark-mode .stat-card {
+    background-color: rgba(28, 28, 30, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-card h3 {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--heading-color);
+}
+.card-icon {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    font-size: 2.5rem;
+    opacity: 0.1;
+}
+
+/* Request Management Section */
+.request-section h2 {
+    color: var(--heading-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-color);
+}
+.request-table-container {
+    overflow-x: auto;
+    background-color: var(--navbar-bg);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+}
+body.dark-mode .request-table-container {
+    background-color: rgba(28, 28, 30, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.request-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.request-table th, .request-table td {
+    padding: 1rem;
+    text-align: left;
+    color: var(--text-color);
+}
+.request-table thead {
+    border-bottom: 1px solid var(--secondary-color);
+}
+.request-table th {
+    font-weight: 600;
+    color: var(--heading-color);
+}
+.request-table tbody tr:not(:last-child) {
+    border-bottom: 1px solid rgba(108, 117, 125, 0.2);
+}
+.request-table .button.primary {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
