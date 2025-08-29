@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - InstaVerify</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="Home.css">
+    <link rel="stylesheet" href="admin.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" defer></script>
+    <script src="chnagebg.js"></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="bulbon.png" id="theme-toggle" alt="Toggle dark/light mode" width="40" height="40">
+            <h1 id="projectname">InstaVerify</h1>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="Home.html" class="page">Home</a>
+            </nav>
+    </header>
+
+    <main class="dashboard-content">
+        <div id="admin-auth-layer">
+            <div id="auth-message" class="auth-box">Connecting to wallet...</div>
+        </div>
+
+        <div class="dashboard-header">
+            <h1>Admin Dashboard</h1>
+            <p>Live statistics and management tools for the InstaVerify platform.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Registered Institutes</h3>
+                <p id="total-institutes" class="stat-number">...</p>
+                <div class="card-icon">🏫</div>
+            </div>
+            <div class="stat-card">
+                <h3>Documents on Chain</h3>
+                <p id="total-documents" class="stat-number">...</p>
+                <div class="card-icon">📄</div>
+            </div>
+            <div class="stat-card">
+                <h3>Failed Verifications</h3>
+                <p id="failed-verifications" class="stat-number">...</p>
+                <div class="card-icon">❌</div>
+            </div>
+        </div>
+
+        <div class="request-section">
+            <h2>Pending Institute Requests</h2>
+            <div class="request-table-container">
+                <table class="request-table">
+                    <thead>
+                        <tr>
+                            <th>Institute Name</th>
+                            <th>Wallet Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requests-tbody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script> <script src="admin.js"></script> </body>
+</html>
