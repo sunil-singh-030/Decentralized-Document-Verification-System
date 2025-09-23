@@ -43,6 +43,10 @@ InstaVerify is a document verification platform where you can upload and verify 
  
 
 
+https://github.com/user-attachments/assets/82f12308-6bcd-4ca3-848f-fc30b72c7cd7
+
+
+
 
  **Upload Document**
  
@@ -58,7 +62,6 @@ https://github.com/user-attachments/assets/0f338416-9641-4ac5-9b5d-7dd7d59558f9
 
 
 **Verify Document**
-
 
 
 
