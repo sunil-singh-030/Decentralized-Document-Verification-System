@@ -41,7 +41,7 @@ InstaVerify is a document verification platform where you can upload and verify 
  **Register Institute**
 
  
-https://github.com/user-attachments/assets/cbf431e1-31f8-49bb-9837-f18a60ec3393
+https://github.com/user-attachments/assets/aa8edaad-281a-4708-9c67-30db86393626
 
 
  **Upload Document**
