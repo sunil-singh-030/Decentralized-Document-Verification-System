@@ -1,8 +1,8 @@
 # InstaVerify :- Decentralized-Document-Verification-System
-  Demo Video :- [![Watch the video](<img width="1905" height="913" alt="Screenshot 2025-10-11 101954" src="https://github.com/user-attachments/assets/b42c09af-dbe9-4f18-919b-d322cba20cae" />)](https://www.youtube.com/watch?v=PBkGjYg8e2I?si=kEu1ILV6j2kgi8XZ)
+  Demo Video :- <iframe width="560" height="315" src="https://www.youtube.com/embed/PBkGjYg8e2I?si=kEu1ILV6j2kgi8XZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
-<img width="1905" height="913" alt="Screenshot 2025-10-11 101954" src="https://github.com/user-attachments/assets/b42c09af-dbe9-4f18-919b-d322cba20cae" />
+
 
 
 # Overview
