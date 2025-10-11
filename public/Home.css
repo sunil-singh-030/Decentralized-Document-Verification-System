@@ -1,289 +1,424 @@
-/* --- 1. Global Styles & CSS Variables --- */
 :root {
-    /* "Bulb Off" Theme (Light Mode) */
-    --background-color: #f4f7fc;
-    --text-color: #333;
-    --primary-color: #007bff;
-    --primary-hover-color: #0056b3;
-    --secondary-color: #6c757d;
-    --heading-color: #1a253c;
-    --navbar-bg: #ffffff;
-    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    --tagline-color: #5a6a85;
-
-    /* Fonts */
-    --font-family: 'Poppins', sans-serif;
+  --bg: #f4f7fc;
+  --text: #2c3e50;
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --secondary: #6c757d;
+  --heading: #1a253c;
+  --tagline: #5a6a85;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --transition: 0.3s ease;
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-border: rgba(255, 255, 255, 0.18);
+  --gradient-primary: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  --gradient-secondary: linear-gradient(135deg, #6c757d 0%, #5a6c7d 100%);
 }
 
-body.dark-mode {
-    /* "Bulb On" Theme (Dark Mode) Variables */
-    --background-color: #121212;
-    --text-color: #e0e0e0;
-    --primary-color: #1e90ff; /* A vibrant blue for dark mode */
-    --primary-hover-color: #5cadff;
-    --secondary-color: #a9b1ba;
-    --heading-color: #ffffff;
-    --navbar-bg: #1c1c1e; /* Base dark color for navbar */
-    --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    --tagline-color: #9ab0d9;
-}
-
+/* Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: var(--font-family);
-    background-color: var(--background-color);
-    /* This is the "Bulb Off" background */
-    background: linear-gradient(135deg, #f4f7fc, #e9ecf2);
-    color: var(--text-color);
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-    transition: background 0.5s ease;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+  transition: background var(--transition), color var(--transition);
+  min-height: 100vh;
+  position: relative;
 }
 
-/* --- "BULB ON" THEME (TRUE DARK MODE) --- */
-body.dark-mode {
-    /* A dark overlay on top of your image */
-    background: 
-        linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.95)), 
-        url('pimg1.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+/* Subtle background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: 
+    radial-gradient(circle at 25% 25%, rgba(0, 123, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(108, 117, 125, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
 }
 
+/* Floating background orb */
+body::after {
+  content: '';
+  position: fixed;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,123,255,0.25) 0%, transparent 70%);
+  top: 20%; left: -200px;
+  filter: blur(80px);
+  animation: float 10s infinite alternate ease-in-out;
+  z-index: -2;
+}
 
-/* --- 2. Navbar --- */
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(40px); }
+}
+
+/* Navbar (kept untouched per request) */
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 5%;
-    background-color: var(--navbar-bg);
-    box-shadow: var(--card-shadow);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  display: flex;
+  align-items: center;   
+  justify-content: space-between; 
+  background: #3e5260;
+  padding: 10px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* === NEW NAVBAR THEME FOR DARK MODE === */
-body.dark-mode .navbar {
-    background-color: rgba(28, 28, 30, 0.75); /* Semi-transparent dark background */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* For Safari */
-    box-shadow: none; /* Shadow is not needed with the blur effect */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle bottom border */
-}
-/* === END OF NEW SECTION === */
-
-
-/* --- 3. Hero Section --- */
-.hero-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 100vh;
-    padding: 100px 20px 20px;
-}
-
-/* Adds a subtle fade-in animation for content */
-.hero-section > * {
-    animation: contentFadeIn 1s ease-out forwards;
-    opacity: 0;
-}
-.hero-section h2 { animation-delay: 0.2s; }
-.hero-section #tagline { animation-delay: 0.4s; }
-.hero-section #description { animation-delay: 0.6s; }
-.hero-section .button-group { animation-delay: 0.8s; }
-
-@keyframes contentFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.welcome-msg {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: var(--heading-color);
-    margin-bottom: 0.5rem;
-}
-
-/* Trending Gradient Text for Dark Mode */
-body.dark-mode .welcome-msg {
-    background: linear-gradient(90deg, #ffffff, #9ab0d9);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-#tagline {
-    font-size: 1.2rem;
-    font-style: italic;
-    color: var(--tagline-color);
-    margin-bottom: 1.5rem;
-}
-
-#description {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin-bottom: 2rem;
-    color: var(--text-color);
-}
-
-
-/* --- 4. Buttons --- */
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.button {
-    text-decoration: none;
-    padding: 12px 30px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.button.primary {
-    background-color: var(--primary-color);
-    color: #fff;
-}
-
-.button.secondary {
-    background-color: transparent;
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-
-.button:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.button.primary:hover {
-    background-color: var(--primary-hover-color);
-}
-
-.button.secondary:hover {
-    background-color: var(--secondary-color);
-    color: #fff;
-}
-
-/* Redesigned secondary button for dark mode (Ghost Button) */
-body.dark-mode .button.secondary {
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
-}
-body.dark-mode .button.secondary:hover {
-    background-color: var(--secondary-color);
-    color: #121212; /* Dark text on hover */
-}
-
-
-/* --- 5. Responsive Design --- */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem 2%;
-    }
-    
-    .hero-section {
-        padding-top: 150px; 
-    }
-
-    .welcome-msg {
-        font-size: 2.5rem;
-    }
-
-    #tagline {
-        font-size: 1rem;
-    }
-
-    #description {
-        font-size: 0.9rem;
-    }
-
-    .button-group {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-}
-
-/* I have left the rest of the file same */
 .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center; 
+  gap: 10px; 
 }
 
-#theme-toggle {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-#theme-toggle:hover {
-    transform: scale(1.1) rotate(15deg);
+.logo-container img {
+  height: 50px; 
+  width: auto;
+  border-radius: 8px; 
 }
 
 #projectname {
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--heading-color);
+  color: white;
+  font-size: 24px;
+  margin: 0;
 }
 
 .nav-links {
-    display: flex;
-    gap: 1.5rem;
+  display: flex;
+  gap: 20px;
 }
 
-.page {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: 400;
-    padding: 8px 0;
-    position: relative;
-    transition: color 0.3s ease;
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color var(--transition);
 }
 
-.page::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-color);
-    transition: width 0.3s ease;
+.nav-links a:hover,
+.nav-links a.active {
+  color: #ff9800;
 }
 
-.page:hover::after,
-.page.active::after {
-    width: 100%;
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 100px 20px 80px;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+  animation: fadeIn 1s ease-out;
 }
 
-.page:hover,
-.page.active {
-    color: var(--primary-color);
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 200px; height: 200px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  filter: blur(100px);
+  z-index: -1;
+}
+
+.typewriter {
+  position: relative;
+  width: 24em;
+  margin: 1rem auto 0.5rem;
+  border-right: 3px solid transparent;
+  font-size: 180%;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 600;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.anim-typewriter {
+  animation: 
+    typing 4s steps(40) forwards,
+    blink-caret 0.8s step-end 4s,
+    hide-caret 0.1s 4s forwards;
+}
+
+@keyframes typing { from { width: 0; } to { width: 24em; } }
+@keyframes blink-caret { 50% { border-color: #ccc; } }
+@keyframes hide-caret { to { border-color: transparent; } }
+
+#tagline {
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--tagline);
+  margin-bottom: 1.2rem;
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+.button {
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  font-size: 1rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.button:hover::before { left: 100%; }
+
+.button.primary {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+}
+
+.button.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(0, 123, 255, 0.4);
+}
+
+.button.secondary {
+  background: var(--card-bg);
+  color: var(--secondary);
+  border: 2px solid var(--secondary);
+}
+
+.button.secondary:hover {
+  background: var(--gradient-secondary);
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(108, 117, 125, 0.3);
+}
+
+/* Features Section */
+.features {
+  padding: 80px 10%;
+  text-align: center;
+  background: linear-gradient(135deg, #fdfdfd, #f0f7ff);
+  border-top: 1px solid #eaeaea;
+  animation: fadeIn 1.2s ease;
+}
+
+.features h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: var(--heading);
+  position: relative;
+  display: inline-block;
+}
+
+.features h2::after {
+  content: "";
+  position: absolute;
+  bottom: -12px; left: 50%;
+  transform: translateX(-50%);
+  width: 80px; height: 3px;
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: var(--shadow);
+  transition: all 0.4s ease;
+}
+
+.feature-card i {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(0,123,255,0.2);
+}
+
+/* Impact Line */
+.impact-line {
+  font-size: 1.2rem;
+  margin: 35px 0 25px;
+  font-weight: 500;
+  color: #333;
+}
+
+.impact-line span {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.impact-line em {
+  font-style: italic;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+/* Footer */
+.footer {
+  background: var(--gradient-secondary);
+  color: #fff;
+  padding: 50px 20px 20px;
+  margin-top: 50px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-brand h2 {
+  font-size: 1.8rem;
+  margin-top: 10px;
+  color: var(--primary);
+}
+
+.footer-brand p {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.footer-logo {
+  width: 60px; height: 60px;
+  border-radius: 10px;
+}
+
+.footer-links h3,
+.footer-contact h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: var(--primary);
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin: 8px 0;
+}
+
+.footer-links ul li a {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: color var(--transition);
+}
+
+.footer-links ul li a:hover { color: var(--primary); }
+
+.footer-contact p { margin: 8px 0; font-size: 0.95rem; }
+
+.footer-contact a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-contact a:hover { color: var(--primary); }
+
+.social-icons { margin-top: 10px; }
+
+.social-icons a {
+  color: #fff;
+  font-size: 1.3rem;
+  margin-right: 15px;
+  transition: transform var(--transition), color var(--transition);
+}
+
+.social-icons a:hover {
+  color: var(--primary);
+  transform: scale(1.2);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 30px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar { flex-direction: column; gap: 1rem; padding: 1rem 3%; }
+  .hero-section { padding: 80px 20px 60px; }
+  .typewriter { font-size: 140%; width: 20em; }
+  #tagline { font-size: 1.1rem; }
+  .button-group { flex-direction: column; align-items: center; }
+  .button { width: 100%; max-width: 300px; }
+}
+
+@media (max-width: 480px) {
+  .hero-section h2 { font-size: 2rem; }
+  .typewriter { font-size: 120%; width: 18em; }
+  .button { padding: 14px 24px; font-size: 0.9rem; }
 }
