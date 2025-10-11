@@ -1,0 +1,250 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract InstaVerify31{
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
+    // ------------------------- Structs -------------------------
+
+    struct Document {
+        bytes32 hash;
+        string cid;
+    }
+
+    struct Student {
+        string name;
+        string email;
+        address institute;
+        bool exists;
+        Document[] documents;
+    }
+
+    struct Institute {
+        string name;
+        address wallet;
+        string email;
+        bool isActive;
+    }
+
+    struct StudentInput {
+        string rollNo;
+        string name;
+        string email;
+        bytes32 docHash;
+        string cid;
+    }
+
+    // ------------------------- Mappings -------------------------
+
+    mapping(address => Institute) public instituteDetails;
+    mapping(address => bool) public institutes;
+    mapping(string => Student) private students;
+    mapping(address => string) public instituteNames;
+
+    // ------------------------- State Counters -------------------------
+
+    uint public totalInstitutes;
+    uint public totalStudents;
+    uint public totalDocuments;
+
+    // ------------------------- Events -------------------------
+
+    event InstituteAdded(address indexed wallet, string name, string email);
+    event InstituteRevoked(address indexed wallet);
+    event StudentDocumentAdded(string indexed rollNo, bytes32 hash, string cid);
+    event BulkStudentDocumentsAdded(uint count);
+    event OwnershipTransferred(address indexed oldOwner, address indexed newOwner);
+
+    // ------------------------- Modifiers -------------------------
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not authorized: Only owner");
+        _;
+    }
+
+    modifier onlyInstitute() {
+        require(institutes[msg.sender], "Not authorized: Only institute");
+        _;
+    }
+    // Keep track of all institute addresses
+address[] private instituteList;
+
+// Function to return details of every institute
+function getAllInstitutes() external view returns (Institute[] memory) {
+    Institute[] memory list = new Institute[](instituteList.length);
+    for (uint i = 0; i < instituteList.length; i++) {
+        list[i] = instituteDetails[instituteList[i]];
+    }
+    return list;
+}
+
+    // ------------------------- Functions -------------------------
+
+    // Make sure to push new institutes into the list when adding
+function addInstitute(address _wallet, string calldata _name, string calldata _email) external onlyOwner returns (bool) {
+    require(_wallet != address(0), "Invalid address");
+
+    if (!institutes[_wallet]) {
+        // First time registration
+        institutes[_wallet] = true;
+        instituteList.push(_wallet); // push only once
+        totalInstitutes++;
+    } else {
+        // Already exists but might be revoked, just reactivate
+        institutes[_wallet] = true;
+    }
+
+    // Update institute details in either case
+    instituteNames[_wallet] = _name;
+    instituteDetails[_wallet] = Institute(_name, _wallet, _email, true);
+
+    emit InstituteAdded(_wallet, _name, _email);
+    return true;
+}
+
+
+
+    function revokeInstitute(address _wallet) external onlyOwner returns (bool) {
+        require(institutes[_wallet], "Institute not found");
+
+        institutes[_wallet] = false;
+        instituteDetails[_wallet].isActive = false;
+
+        emit InstituteRevoked(_wallet);
+        return true;
+    }
+    function reactivateInstitute(address _wallet) external onlyOwner returns (bool) {
+    require(_wallet != address(0), "Invalid address");
+
+    Institute storage inst = instituteDetails[_wallet];
+    require(bytes(inst.name).length > 0, "Institute not found"); // check struct exists
+
+    inst.isActive = true;
+    institutes[_wallet] = true; // reactivate mapping
+    return true;
+}
+
+
+
+    function getInstituteInfo(address _wallet) external view returns (bool, string memory, string memory, bool) {
+        if (!institutes[_wallet]) return (false, "", "", false);
+
+        Institute storage inst = instituteDetails[_wallet];
+        return (true, inst.name, inst.email, inst.isActive);
+    }
+
+    function addStudentDocument(
+        string calldata rollNo,
+        string calldata name,
+        string calldata email,
+        bytes32 docHash,
+        string calldata cid
+    ) external onlyInstitute returns (bool) {
+        Student storage student = students[rollNo];
+
+        if (!student.exists) {
+            student.name = name;
+            student.email = email;
+            student.institute = msg.sender;
+            student.exists = true;
+            totalStudents++;
+        }
+
+        student.documents.push(Document(docHash, cid));
+        totalDocuments++;
+
+        emit StudentDocumentAdded(rollNo, docHash, cid);
+        return true;
+    }
+
+    // ------------------------- Bulk Upload -------------------------
+
+    function addMultipleStudentDocuments(StudentInput[] calldata inputs) external onlyInstitute returns (bool) {
+        for (uint i = 0; i < inputs.length; i++) {
+            Student storage student = students[inputs[i].rollNo];
+
+            if (!student.exists) {
+                student.name = inputs[i].name;
+                student.email = inputs[i].email;
+                student.institute = msg.sender;
+                student.exists = true;
+                totalStudents++;
+            }
+
+            student.documents.push(Document(inputs[i].docHash, inputs[i].cid));
+            totalDocuments++;
+
+            emit StudentDocumentAdded(inputs[i].rollNo, inputs[i].docHash, inputs[i].cid);
+        }
+
+        emit BulkStudentDocumentsAdded(inputs.length);
+        return true;
+    }
+
+    // ------------------------- Verification & Queries -------------------------
+
+    function verifyDocument(string calldata rollNo, bytes32 docHash) external view returns (bool, string memory) {
+        Student storage student = students[rollNo];
+        if (!student.exists) return (false, "");
+
+        for (uint i = 0; i < student.documents.length; i++) {
+            if (student.documents[i].hash == docHash) {
+                return (true, student.documents[i].cid);
+            }
+        }
+        return (false, "");
+    }
+
+    function getDocumentCIDs(string calldata rollNo) external view returns (bool, string[] memory) {
+        Student storage student = students[rollNo];
+        if (!student.exists) return (false, new string[](0) );  // ✅ fixed
+
+        string[] memory cids = new string[](student.documents.length);
+        for (uint i = 0; i < student.documents.length; i++) {
+            cids[i] = student.documents[i].cid;
+        }
+        return (true, cids);
+    }
+
+
+    function getStudentInfo(string calldata rollNo) external view returns (
+        bool,
+        string memory name,
+        string memory email,
+        address institute,
+        uint totalDocs
+    ) {
+        Student storage student = students[rollNo];
+        if (!student.exists) return (false, "", "", address(0), 0);
+
+        return (true, student.name, student.email, student.institute, student.documents.length);
+    }
+
+    // ------------------------- Ownership -------------------------
+
+    function transferOwnership(address newOwner) external onlyOwner returns (bool) {
+        require(newOwner != address(0), "Invalid new owner");
+        address oldOwner = owner;
+        owner = newOwner;
+        emit OwnershipTransferred(oldOwner, newOwner);
+        return true;
+    }
+
+    // ------------------------- Stats -------------------------
+
+    function getTotalInstitutes() external view returns (uint) {
+        return totalInstitutes;
+    }
+
+    function getTotalDocuments() external view returns (uint) {
+        return totalDocuments;
+    }
+
+    function getTotalStudents() external view returns (uint) {
+        return totalStudents;
+    }
+}
