@@ -4,68 +4,68 @@ const contractABI = "CONTRACT_ABI";
 let provider, signer, contract;
 const hiddenId = document.getElementById("hidden-id");
 const fileInput = document.getElementById('file-input');
-    const dropZone = document.getElementById('drop-zone');
-    const fileNameDisplay = document.getElementById('file-name');
-    const jsonOutput = document.getElementById('json-output');
-    const outputContainer = document.getElementById('output-container');
-    const copyButton = document.getElementById('copy-button');
-    const copyMessage = document.getElementById('copy-message');
-    const jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4OWY3MGM1Ny04MjE0LTRjZjktYjAwNC1lMGQwNmRkZDc3ZDIiLCJlbWFpbCI6InN1bmlsc2luZ2hqMDRAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiRlJBMSJ9LHsiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiTllDMSJ9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjRlZWRlY2FiYWMxYmRjZDRlOGEzIiwic2NvcGVkS2V5U2VjcmV0IjoiY2MxZWZhZjg0ZDBkN2E0YTQ1MGI5NmY1ZDc2MmI1OWJjNGQwM2E1NGNiY2EzMTc4M2RmNjQ1Y2U1MjlkMDIxNSIsImV4cCI6MTc4MjY2MDQ1Mn0.IXJdXG8VlPHU26k2r55jQmz6JhuryK67Ec3r7sc7rJw";
-    // Allow file selection by clicking the drop zone
-    dropZone.addEventListener('click', () => fileInput.click());
+const dropZone = document.getElementById('drop-zone');
+const fileNameDisplay = document.getElementById('file-name');
+const jsonOutput = document.getElementById('json-output');
+const outputContainer = document.getElementById('output-container');
+const copyButton = document.getElementById('copy-button');
+const copyMessage = document.getElementById('copy-message');
+const jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4OWY3MGM1Ny04MjE0LTRjZjktYjAwNC1lMGQwNmRkZDc3ZDIiLCJlbWFpbCI6InN1bmlsc2luZ2hqMDRAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiRlJBMSJ9LHsiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiTllDMSJ9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjRlZWRlY2FiYWMxYmRjZDRlOGEzIiwic2NvcGVkS2V5U2VjcmV0IjoiY2MxZWZhZjg0ZDBkN2E0YTQ1MGI5NmY1ZDc2MmI1OWJjNGQwM2E1NGNiY2EzMTc4M2RmNjQ1Y2U1MjlkMDIxNSIsImV4cCI6MTc4MjY2MDQ1Mn0.IXJdXG8VlPHU26k2r55jQmz6JhuryK67Ec3r7sc7rJw";
+// Allow file selection by clicking the drop zone
+dropZone.addEventListener('click', () => fileInput.click());
 
-    // Handle drag and drop events
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('border-indigo-600', 'bg-indigo-50');
-    });
-    
-    dropZone.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('border-indigo-600', 'bg-indigo-50');
-    });
+// Handle drag and drop events
+dropZone.addEventListener('dragover', (e) => {
+	e.preventDefault();
+	dropZone.classList.add('border-indigo-600', 'bg-indigo-50');
+});
 
-    dropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropZone.classList.remove('border-indigo-600', 'bg-indigo-50');
-        const files = e.dataTransfer.files;
-        if (files.length > 0) {
-            fileInput.files = files;
-            handleFileSelect({ target: fileInput });
-        }
-    });
+dropZone.addEventListener('dragleave', (e) => {
+	e.preventDefault();
+	dropZone.classList.remove('border-indigo-600', 'bg-indigo-50');
+});
 
-    // Handle file selection from the input
-    fileInput.addEventListener('change', handleFileSelect);
+dropZone.addEventListener('drop', (e) => {
+	e.preventDefault();
+	dropZone.classList.remove('border-indigo-600', 'bg-indigo-50');
+	const files = e.dataTransfer.files;
+	if (files.length > 0) {
+		fileInput.files = files;
+		handleFileSelect({ target: fileInput });
+	}
+});
 
-         function handleFileSelect(event) {
-        const file = event.target.files[0];
-        if (!file) {
-            return;
-        }
+// Handle file selection from the input
+fileInput.addEventListener('change', handleFileSelect);
 
-        // Display the selected file name
-        fileNameDisplay.textContent = `Selected file: ${file.name}`;
-        
-        const reader = new FileReader();
-		// Example: remove the id from an element
-		const element = document.getElementById('main-id');
-		element.remove(); 
-		document.getElementById("hidden-id").style.display = 'block';
-		document.getElementById("hidden-id").textContent = "In progress...";
-        reader.onload = async function(e) {
-            try {
-                const data = new Uint8Array(e.target.result);
-                // Use SheetJS to parse the file data
-                const workbook = XLSX.read(data, { type: 'array' });
+	 function handleFileSelect(event) {
+	const file = event.target.files[0];
+	if (!file) {
+		return;
+	}
 
-                // Get the first sheet name
-                const firstSheetName = workbook.SheetNames[0];
-                const worksheet = workbook.Sheets[firstSheetName];
+	// Display the selected file name
+	fileNameDisplay.textContent = `Selected file: ${file.name}`;
+	
+	const reader = new FileReader();
+	// Example: remove the id from an element
+	const element = document.getElementById('main-id');
+	element.remove(); 
+	document.getElementById("hidden-id").style.display = 'block';
+	document.getElementById("hidden-id").textContent = "In progress...";
+	reader.onload = async function(e) {
+		try {
+			const data = new Uint8Array(e.target.result);
+			// Use SheetJS to parse the file data
+			const workbook = XLSX.read(data, { type: 'array' });
 
-                // Convert sheet data to JSON
-                // The first row of the Excel sheet is expected to be the headers (name, rollno, etc.)
-                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+			// Get the first sheet name
+			const firstSheetName = workbook.SheetNames[0];
+			const worksheet = workbook.Sheets[firstSheetName];
+
+			// Convert sheet data to JSON
+			// The first row of the Excel sheet is expected to be the headers (name, rollno, etc.)
+			const jsonData = XLSX.utils.sheet_to_json(worksheet);
                 let cidArr = [];
                 let hashArr = [];
                 const stdDetails = [];
@@ -235,6 +235,7 @@ async function uploadMultipleStudents(contractAddress, abi, studentsArray) {
         throw err;
     }
 }
+
 
 
 
