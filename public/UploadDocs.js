@@ -175,7 +175,7 @@ function extractFileId(driveLink) {
     return match[1];
 }
 async function fetchDriveFileAsBlob(driveUrl) {
-    const apiKey = "AIzaSyDZhnHajDtU3QhIR0bsdn_qkzeagyX-pG8"; // add your API key
+    const apiKey = "your API key"; // add your API key
     const fileId = extractFileId(driveUrl);
     const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
 
@@ -235,6 +235,7 @@ async function uploadMultipleStudents(contractAddress, abi, studentsArray) {
         throw err;
     }
 }
+
 
 
 
