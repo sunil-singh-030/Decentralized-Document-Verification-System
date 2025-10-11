@@ -13,18 +13,19 @@
     <link rel="stylesheet" href="admin.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" defer></script>
-    <script src="chnagebg.js"></script>
+    <script src="changebg.js" defer></script>
 </head>
 <body>
     <header class="navbar">
         <div class="logo-container">
-            <img src="bulbon.png" id="theme-toggle" alt="Toggle dark/light mode" width="40" height="40">
+            <img src="logo1.png" alt="">
             <h1 id="projectname">InstaVerify</h1>
         </div>
         
         <nav class="nav-links">
             <a href="Home.html" class="page">Home</a>
-            </nav>
+            <a href="RegisterInstitute.html" class="page">Register</a>
+        </nav>
     </header>
 
     <main class="dashboard-content">
@@ -32,46 +33,53 @@
             <div id="auth-message" class="auth-box">Connecting to wallet...</div>
         </div>
 
-        <div class="dashboard-header">
+        <section class="dashboard-header">
             <h1>Admin Dashboard</h1>
             <p>Live statistics and management tools for the InstaVerify platform.</p>
-        </div>
+        </section>
 
-        <div class="stats-grid">
+        <section class="stats-grid">
             <div class="stat-card">
                 <h3>Registered Institutes</h3>
-                <p id="total-institutes" class="stat-number">...</p>
+                <p id="total-institutes" class="stat-number">
+                    <span class="skeleton-loader">&nbsp;</span>
+                </p>
                 <div class="card-icon">🏫</div>
             </div>
             <div class="stat-card">
                 <h3>Documents on Chain</h3>
-                <p id="total-documents" class="stat-number">...</p>
+                <p id="total-documents" class="stat-number">
+                    <span class="skeleton-loader">&nbsp;</span>
+                </p>
                 <div class="card-icon">📄</div>
             </div>
             <div class="stat-card">
-                <h3>Failed Verifications</h3>
-                <p id="failed-verifications" class="stat-number">...</p>
-                <div class="card-icon">❌</div>
+                <h3>Students</h3>
+                <p id="total-students" class="stat-number">
+                    <span class="skeleton-loader">&nbsp;</span>
+                </p>
+                <div class="card-icon">👨‍🎓</div>
             </div>
-        </div>
+        </section>
 
-        <div class="request-section">
-            <h2>Pending Institute Requests</h2>
+        <section class="request-section">
+            <h2>Institute Details</h2>
             <div class="request-table-container">
                 <table class="request-table">
                     <thead>
                         <tr>
                             <th>Institute Name</th>
                             <th>Wallet Address</th>
-                            <th>Action</th>
-                        </tr>
+                            <th>Actions</th> </tr>
                     </thead>
                     <tbody id="requests-tbody">
                         </tbody>
                 </table>
             </div>
-        </div>
+        </section>
     </main>
-
-    <script src="script.js"></script> <script src="admin.js"></script> </body>
+    
+    
+    <script src="admin.js" defer></script> 
+</body>
 </html>
