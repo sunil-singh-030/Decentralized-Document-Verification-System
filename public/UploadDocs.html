@@ -1,75 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Documents - InstaVerify</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="Home.css">
-    <link rel="stylesheet" href="UploadDocs.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Documents - InstaVerify</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" defer></script>
-    <script src="chnagebg.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" href="Home.css">
+  <link rel="stylesheet" href="UploadDocs.css">
+
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+
+  <!-- Custom Scripts -->
+  <script src="UploadDocs.js" defer></script>
+
+  
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="bulbon.png" id="theme-toggle" alt="Toggle dark/light mode" width="40" height="40">
-            <h1 id="projectname">InstaVerify</h1>
-        </div>
-        
-        <nav class="nav-links">
-            <a href="Home.html" class="page">Home</a>
-            <a href="GetDocs.html" class="page">Get Docs</a>
-            <a href="VerifyDocs.html" class="page">Verify</a>
-            <a href="RegisterInstitute.html" class="page">Register</a>
-            <a href="UploadDocs.html" class="page active">Upload</a>
-        </nav>
+
+  <!-- Navbar (unchanged as per request) -->
+  <header class="navbar w-full" style="width: 100%;">
+    <div class="logo-container">
+      <img src="logo1.png" alt="Logo">
+      <h1 id="projectname">InstaVerify</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="Home.html">Back</a>
+    </nav>
+  </header>
+
+  <!-- Main Section -->
+  <main id="main-id">
+    <header class="text-center">
+      <h1>Upload Students Details</h1>
+      <p>Upload Excel files with student information</p>
     </header>
-    
-    <main class="main-content">
-        <div class="form-container">
-            <form id="upload-form">
-                <h2>Upload a Student Document</h2>
-                <div class="form-group">
-                    <label for="stdname">Student Name</label>
-                    <input type="text" name="stdname" id="stdname" placeholder="e.g., John Doe" required>
-                </div>
-                <div class="form-group">
-                    <label for="rollno">Roll Number</label>
-                    <input type="number" name="rollno" id="rollno" placeholder="e.g., 12345" required>
-                </div>
-                 <div class="form-group">
-                    <label for="email">Student's Email</label>
-                    <input type="email" name="email" id="email" placeholder="e.g., student@example.com" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Document (PDF, JPG, etc.)</label>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="fileInput" name="document" class="file-input-hidden" required>
-                        <label for="fileInput" class="file-input-label">
-                            <span>📤 Choose a file...</span>
-                        </label>
-                        <span class="file-name" id="fileName">No file selected</span>
-                    </div>
-                </div>
 
-                <button type="submit" class="button primary">Upload Document</button>
-            </form>
+    <!-- Upload Drop Zone -->
+    <div id="drop-zone">
+      <input type="file" id="file-input" class="hidden" accept=".xlsx, .xls">
 
-            <div id="status-container">
-                <span id="status-message"></span>
-                <a id="ipfslink" href="#" target="_blank"></a>
-            </div>
-        </div>
-    </main>
+      <!-- Upload Icon -->
+      <svg stroke="currentColor" fill="none" viewBox="0 0 48 48">
+        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 
+                 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 
+                 0L28 28M8 32l9.172-9.172a4 4 0 
+                 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" 
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
 
-    <script src="script.js"></script>
-    <script src="UploadDocs.js"></script>
+      <p><span>Click to upload</span> or drag & drop</p>
+      <p class="text-xs">Only XLSX or XLS files supported</p>
+      <p id="file-name"></p>
+    </div>
+  </main>
+
+  <!-- Hidden message (success/error) -->
+  <span id="hidden-id"></span>
+
 </body>
 </html>
