@@ -1,127 +1,141 @@
-/* --- Styles for the VerifyDocs page --- */
+/* ===========================
+   VERIFY DOCS PAGE
+=========================== */
 
+/* Layout */
 .main-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 120px 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* push form closer to top */
+  min-height: 100vh;
+  padding: 90px 20px 40px; /* balanced spacing below navbar */
+  font-family: 'Poppins', sans-serif;
 }
 
+/* Form container */
 .form-container {
-    width: 100%;
-    max-width: 480px;
-    padding: 2.5rem;
-    background-color: var(--navbar-bg);
-    border-radius: 15px;
-    box-shadow: var(--card-shadow);
-    transition: all 0.3s ease-in-out;
+  width: 100%;
+  max-width: 600px;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  transition: all 0.3s ease-in-out;
 }
 
 body.dark-mode .form-container {
-    background-color: rgba(28, 28, 30, 0.75);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(28, 28, 30, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
+/* Title */
 .form-container h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--heading-color);
-    font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 1.8rem;
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: var(--heading-color, #222);
 }
 
+/* Form group */
 .form-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--text-color);
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-color, #333);
 }
 
+/* Input fields */
 .form-group input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--secondary-color);
-    border-radius: 8px;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    font-size: 1rem;
-    font-family: var(--font-family);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--text-color, #222);
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .form-group input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none;
+  border-color: var(--primary-color, #007bff);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-/* Custom File Input Styles */
+/* ===========================
+   FILE INPUT
+=========================== */
 .file-input-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .file-input-hidden {
-    display: none;
+  display: none;
 }
 
 .file-input-label {
-    flex-shrink: 0;
-    padding: 10px 15px;
-    background-color: var(--secondary-color);
-    color: #fff;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 10px 18px;
+  background: var(--primary-color, #007bff);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
+
 .file-input-label:hover {
-    background-color: var(--heading-color);
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.25);
 }
 
 .file-name {
-    flex-grow: 1;
-    color: var(--text-color);
-    font-style: italic;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  flex-grow: 1;
+  color: var(--text-color, #555);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* Status Message Styles */
+/* ===========================
+   STATUS MESSAGE
+=========================== */
 #status-container {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: 600;
-    display: none; /* Hidden by default */
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+  display: none;
 }
 
 #status-container.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    display: block;
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  display: block;
 }
 
 #status-container.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-    display: block;
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  display: block;
 }
 
 #ipfslink {
-    display: block;
-    margin-top: 0.5rem;
-    color: #0056b3;
-    font-weight: bold;
+  display: block;
+  margin-top: 0.5rem;
+  color: #0056b3;
+  font-weight: bold;
 }
