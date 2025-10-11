@@ -10,7 +10,7 @@ const jsonOutput = document.getElementById('json-output');
 const outputContainer = document.getElementById('output-container');
 const copyButton = document.getElementById('copy-button');
 const copyMessage = document.getElementById('copy-message');
-const jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4OWY3MGM1Ny04MjE0LTRjZjktYjAwNC1lMGQwNmRkZDc3ZDIiLCJlbWFpbCI6InN1bmlsc2luZ2hqMDRAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiRlJBMSJ9LHsiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiTllDMSJ9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjRlZWRlY2FiYWMxYmRjZDRlOGEzIiwic2NvcGVkS2V5U2VjcmV0IjoiY2MxZWZhZjg0ZDBkN2E0YTQ1MGI5NmY1ZDc2MmI1OWJjNGQwM2E1NGNiY2EzMTc4M2RmNjQ1Y2U1MjlkMDIxNSIsImV4cCI6MTc4MjY2MDQ1Mn0.IXJdXG8VlPHU26k2r55jQmz6JhuryK67Ec3r7sc7rJw";
+const jwt = "Your Pinata JWT";
 // Allow file selection by clicking the drop zone
 dropZone.addEventListener('click', () => fileInput.click());
 
@@ -235,6 +235,7 @@ async function uploadMultipleStudents(contractAddress, abi, studentsArray) {
         throw err;
     }
 }
+
 
 
 
