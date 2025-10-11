@@ -1,138 +1,241 @@
-const stdname = document.getElementById("stdname");
-const rollno = document.getElementById("rollno");
-const email = document.getElementById("email");
-const fileinput = document.getElementById("fileInput");
-const Status = document.getElementById("status");
-const CID = document.getElementById("cid");
-const ipfsLink = document.getElementById("ipfslink")
-// Update signer when account is changed
-async function updateSigner() {
-    const accounts = await provider.listAccounts(); // Make sure provider is defined globally
-    if (accounts.length > 0) {
-        signer = provider.getSigner(accounts[0]);
-        const walletaddr = await signer.getAddress();
-        console.log("Updated signer to:", walletaddr);
-    }
-}
 
-// Listen for MetaMask account changes
-window.ethereum.on("accountsChanged", async function (accounts) {
-    console.log("Account changed to:", accounts[0]);
-    await updateSigner();
-});
-
-var cid ;
 const contractAddress = "YOUR_CONTRACT_ADDRESS"; 
 const contractABI = "CONTRACT_ABI";
 let provider, signer, contract;
-//document.getElementById("formfield").remove();
-async function uploadDocs(){
-    if(!fileinput.files.length){
-        alert ("⚠️ Please select a file first.");
-        return;
-    }
-    const file = fileinput.files[0];
-    const formData = new FormData(); // Useful for sending files, blobs, or key-value pairs via fetch or XMLHttpRequest.
-    formData.append("file", file);
+const hiddenId = document.getElementById("hidden-id");
+const fileInput = document.getElementById('file-input');
+    const dropZone = document.getElementById('drop-zone');
+    const fileNameDisplay = document.getElementById('file-name');
+    const jsonOutput = document.getElementById('json-output');
+    const outputContainer = document.getElementById('output-container');
+    const copyButton = document.getElementById('copy-button');
+    const copyMessage = document.getElementById('copy-message');
+    const jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiI4OWY3MGM1Ny04MjE0LTRjZjktYjAwNC1lMGQwNmRkZDc3ZDIiLCJlbWFpbCI6InN1bmlsc2luZ2hqMDRAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInBpbl9wb2xpY3kiOnsicmVnaW9ucyI6W3siZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiRlJBMSJ9LHsiZGVzaXJlZFJlcGxpY2F0aW9uQ291bnQiOjEsImlkIjoiTllDMSJ9XSwidmVyc2lvbiI6MX0sIm1mYV9lbmFibGVkIjpmYWxzZSwic3RhdHVzIjoiQUNUSVZFIn0sImF1dGhlbnRpY2F0aW9uVHlwZSI6InNjb3BlZEtleSIsInNjb3BlZEtleUtleSI6IjRlZWRlY2FiYWMxYmRjZDRlOGEzIiwic2NvcGVkS2V5U2VjcmV0IjoiY2MxZWZhZjg0ZDBkN2E0YTQ1MGI5NmY1ZDc2MmI1OWJjNGQwM2E1NGNiY2EzMTc4M2RmNjQ1Y2U1MjlkMDIxNSIsImV4cCI6MTc4MjY2MDQ1Mn0.IXJdXG8VlPHU26k2r55jQmz6JhuryK67Ec3r7sc7rJw";
+    // Allow file selection by clicking the drop zone
+    dropZone.addEventListener('click', () => fileInput.click());
 
-    if (typeof window.ethereum !== "undefined") {
-        try {
-            provider = new ethers.providers.Web3Provider(window.ethereum);
-            await provider.send("eth_requestAccounts", []);
-            signer = provider.getSigner();
-            contract = new ethers.Contract(contractAddress, contractABI, signer);
-            const walletaddr = await signer.getAddress();
-            console.log("Connected wallet:", walletaddr);
-            // Assuming you have the contract instance already set up
-            const instituteAddress = walletaddr; // Replace with the actual address
-            const isApproved = await contract.institutes(instituteAddress);
-			//console.log(instituteAddress);
-            console.log("Institute status:", isApproved ? "Approved" : "Not approved");
-            if (!isApproved){
-              alert ("Institute is not registered !")
-              return;
-            }
-            document.getElementById("formfield").remove();
-            Status.innerText = "⏳ Uploading to IPFS via Pinata...";
-            try {
-              const res = await fetch("https://api.pinata.cloud/pinning/pinFileToIPFS", {
-                    method: "POST",
-                    headers: {
-                      Authorization: `Bearer YOUR_PINATA_JWT` // 🔁 Replace this line with your actual JWT
-                    },
-                    body: formData
-              });
+    // Handle drag and drop events
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-indigo-600', 'bg-indigo-50');
+    });
+    
+    dropZone.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-indigo-600', 'bg-indigo-50');
+    });
 
-              if (!res.ok) {
-                throw new Error(`Upload failed: ${res.statusText}`);
-              }
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-indigo-600', 'bg-indigo-50');
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            fileInput.files = files;
+            handleFileSelect({ target: fileInput });
+        }
+    });
 
-              const data = await res.json();
-              cid = data.IpfsHash;
-              const timestamp = data.Timestamp;
-              // Convert to Date object
-              const time = new Date(timestamp);
+    // Handle file selection from the input
+    fileInput.addEventListener('change', handleFileSelect);
 
-              // Convert to IST
-              const istTime = time.toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
-              Status.innerText = `✅ Upload Successful!  Time : ${istTime}`;
-              CID.innerText = `CID: ${cid}`;
-              ipfsLink.href = `https://gateway.pinata.cloud/ipfs/${cid}`;
-              ipfsLink.innerText = `🔗 View on IPFS`;
-              console.log("Upload success: ", data, " Time : ",time);
-            } catch (error) {
-              console.error(error);
-              Status.innerText = "❌ Upload Failed!";
-            }
-            const hash = await getFileHash(file);
-            console.log(hash);
-            await addStudentData(rollno.value,stdname.value,email.value,"0x"+hash,cid);
-            
-        } catch (error) {
-            console.error("Wallet connection failed:", error);
-            alert("Failed to connect wallet. See console for details.");
+         function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (!file) {
             return;
         }
-    } else {
-        alert("MetaMask is not installed. Please install it to continue.");
-        return;
-    }    
+
+        // Display the selected file name
+        fileNameDisplay.textContent = `Selected file: ${file.name}`;
+        
+        const reader = new FileReader();
+		// Example: remove the id from an element
+		const element = document.getElementById('main-id');
+		element.remove(); 
+		document.getElementById("hidden-id").style.display = 'block';
+		document.getElementById("hidden-id").textContent = "In progress...";
+        reader.onload = async function(e) {
+            try {
+                const data = new Uint8Array(e.target.result);
+                // Use SheetJS to parse the file data
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // Get the first sheet name
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet data to JSON
+                // The first row of the Excel sheet is expected to be the headers (name, rollno, etc.)
+                const jsonData = XLSX.utils.sheet_to_json(worksheet);
+                let cidArr = [];
+                let hashArr = [];
+                const stdDetails = [];
+                for (let i=0 ; i<jsonData.length ; i++){
+                    let student = jsonData[i];
+                    const driveUrl = student.Drive;
+                    let cid = await genCid(driveUrl,jwt);
+                    cidArr.push(cid);
+                    let hash = await computeFileSHA256(await fetchDriveFileAsBlob(driveUrl));
+                    hashArr.push(hash);
+                    stdDetails.push({
+						rollNo: String(student.Roll).trim(), // ✅ Ensure correct type
+						name: student.Name.trim(),
+						email: student.Email.trim(),
+						docHash: "0x" + hash,
+						cid: cid
+					});
+
+                }
+                console.log(stdDetails);
+                await uploadMultipleStudents(contractAddress,contractABI,stdDetails);
+                
+;				
+
+				
+				hiddenId.textContent = "Documents uploaded Successfully";
+  				hiddenId.className = "success";
+                // // Display the JSON data
+                // const jsonString = JSON.stringify(jsonData, null, 2); // Pretty print
+                // jsonOutput.textContent = jsonString;
+                // outputContainer.style.display = 'block';
+
+            } catch (error) {
+				hiddenId.textContent = "Failed";
+  				hiddenId.className = "error";
+                console.error("Error processing file:", error);
+                jsonOutput.textContent = 'Error: Could not process the file. Please ensure it is a valid Excel file.';
+                outputContainer.style.display = 'block';
+            }
+        };
+		
+        reader.onerror = function(error) {
+            console.error("File could not be read:", error);
+            jsonOutput.textContent = 'Error: Could not read the file.';
+            outputContainer.style.display = 'block';
+        };
+
+        reader.readAsArrayBuffer(file);
+    }
+async function genCid(driveurl,jwt) {
+    
+    let file = await  fetchDriveFileAsBlob(driveurl);
+    let cid =  await uploadFileToIPFS(file,jwt);
+    return cid;
+    
 }
-async function getFileHash(file) {
-    // Read the file as an ArrayBuffer
+async function computeFileSHA256(file) {
+    if (!file) throw new Error("No file provided");
+
+    // Read file as ArrayBuffer
     const arrayBuffer = await file.arrayBuffer();
 
-    // Generate SHA-256 hash
+    // Compute SHA-256 using Web Crypto API
     const hashBuffer = await crypto.subtle.digest("SHA-256", arrayBuffer);
 
-    // Convert ArrayBuffer to hex string
+    // Convert hash to hex string
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+
     return hashHex;
 }
-async function addStudentData(rollNo,name,email,hash,cid) {
-    if (!contract) {
-        alert("Contract not initialized.");
+async function uploadFileToIPFS(file, jwt) {
+    if (!file) throw new Error("No file provided");
+    if (!jwt) throw new Error("No Pinata JWT provided");
+	
+    const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
+    const formData = new FormData();
+    formData.append("file", file);
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Failed to upload: ${response.status} ${response.statusText} - ${errorText}`);
+        }
+
+        const data = await response.json();
+        // data.IpfsHash contains the CID
+        return data.IpfsHash;
+    } catch (error) {
+		
+        console.error("IPFS upload error:", error);
+        throw error;
+    }
+}
+function extractFileId(driveLink) {
+    const regex = /\/d\/([a-zA-Z0-9_-]+)\//;
+    const match = driveLink.match(regex);
+    if (!match || !match[1]) throw new Error("Invalid Google Drive link");
+    return match[1];
+}
+async function fetchDriveFileAsBlob(driveUrl) {
+    const apiKey = "AIzaSyDZhnHajDtU3QhIR0bsdn_qkzeagyX-pG8"; // add your API key
+    const fileId = extractFileId(driveUrl);
+    const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&key=${apiKey}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const blob = await response.blob();
+        return blob;
+    } catch (error) {
+        console.error("Failed to fetch Drive file:", error);
+        return null;
+    }
+
+}
+
+
+
+
+// Example: connect to MetaMask
+async function uploadMultipleStudents(contractAddress, abi, studentsArray) {
+    if (!window.ethereum) {
+        alert("Please install MetaMask!");
         return;
     }
 
+    // Request access to accounts
+    await window.ethereum.request({ method: "eth_requestAccounts" });
+
+    // Provider & signer
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = await provider.getSigner();
+
+    // Contract instance
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
+    // Prepare input array in the format expected by Solidity
+    // Each student: { rollNo, name, email, docHash, cid }
+    const inputs = studentsArray.map(student => ({
+        rollNo: student.rollNo,
+        name: student.name,
+        email: student.email,
+        docHash: student.docHash,
+        cid: student.cid
+    }));
+
     try {
-        // Optional: simulate call to check if can be added
-        const canAdd = await contract.callStatic.addStudentDocument(rollNo,name,email,hash,cid);
-		console.log(canAdd);
-        if (!canAdd) {
-            alert("College is not registered. Register first");
-            return;
-        }
-        // Send actual transaction
-        const tx = await contract.addStudentDocument(rollNo,name,email,hash,cid);
-        await tx.wait();
-        const info = await contract.getStudentInfo(rollNo);
-        console.log(info);
-        alert("Student data added successfully!");
-    } catch (error) {
-        console.error("Error adding institute:", error);
-        alert("Transaction failed. See console for details.");
+        const tx = await contract.addMultipleStudentDocuments(inputs);
+        console.log("Transaction sent. Waiting for confirmation...");
+        const receipt = await tx.wait();
+        console.log("Transaction confirmed!", receipt);
+		
+        return receipt;
+    } catch (err) {
+        console.error("Error uploading student documents:", err);
+        throw err;
     }
 }
+
+
+
 
