@@ -1,5 +1,6 @@
 # InstaVerify :- Decentralized-Document-Verification-System
-  Demo Video :- https://youtu.be/PBkGjYg8e2I?si=vRFUeCkHI3ya_pcw
+  Demo Video :- [![Watch the video](https://img.youtube.com/vi/PBkGjYg8e2I?si=CB8EFAguRvqQSxqj/0.jpg)](https://www.youtube.com/watch?v=PBkGjYg8e2I?si=CB8EFAguRvqQSxqj)
+
 # Overview
 InstaVerify is a document verification platform where you can upload and verify academic documents using blockchain. It ensures that the documents are genuine and can't be tampered later on. Once uploaded, the documents are stored securely and can be verified anytime.
 
