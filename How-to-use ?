@@ -1,0 +1,6 @@
+# Install MetaMask Extension on your browser
+# Deploy the contract using remix and store the ABI and contract Address
+# replace your ABI and contract Address in js file where ever required
+# In server.js file use your email id and pass
+# create Api on Pinata for IPFS file storage and get its JWT from there
+# use your original JWT in verifydocs.js and uploadDocs.js file.
