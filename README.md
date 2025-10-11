@@ -1,7 +1,7 @@
 # InstaVerify :- Decentralized-Document-Verification-System
 
 
-Demo Video : https://www.youtube.com/watch?v=PBkGjYg8e2I
+Demo video (with explanation) : https://www.youtube.com/watch?v=PBkGjYg8e2I
   
 
 # Overview
