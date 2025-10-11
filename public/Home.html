@@ -1,48 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InstaVerify | Secure Document Verification</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="Home.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" defer></script>
-    <script src="chnagebg.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InstaVerify | Secure Document Verification</title>
+  <link rel="stylesheet" href="Home.css">
+  <!-- Fonts -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
 </head>
 <body>
-    <header class="navbar">
-        <div class="logo-container">
-            <img src="bulbon.png" id="theme-toggle" alt="Toggle dark/light mode" width="40" height="40">
-            <h1 id="projectname">InstaVerify</h1>
-        </div>
-        
-        <nav class="nav-links">
-            <a href="Home.html" class="page active">Home</a>
-            <a href="GetDocs.html" class="page">Get Docs</a>
-            <a href="VerifyDocs.html" class="page">Verify</a>
-            <a href="RegisterInstitute.html" class="page">Register</a>
-            <a href="UploadDocs.html" class="page">Upload</a>
-        </nav>
-    </header>
-    
-    <main class="hero-section">
-        <h2 class="welcome-msg">Welcome to InstaVerify!</h2>
-        <p id="tagline">"Instantly Verified. Infinitely Trusted."</p>
-        <p id="description">
-            Leveraging Blockchain technology to ensure academic credentials are stored and verified in a secure, transparent, and tamper-proof way.
-        </p>
-        
-        <div class="button-group">
-            <a href="GetDocs.html" class="button primary">I'm a Student</a>
-            <a href="VerifyDocs.html" class="button secondary">I'm a Verifier</a>
-            <a href="UploadDocs.html" class="button secondary">I'm an Institute</a>
-        </div>
-    </main>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo-container">
+      <img src="logo1.png" alt="">
+      <h1 id="projectname">InstaVerify</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="Home.html" class="active">Home</a>
+      <a href="GetDocs.html">Get Docs</a>
+      <a href="VerifyDocs.html">Verify</a>
+      <a href="UploadDocs.html">Upload</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+  <section class="features">
+  <h2>Why Choose InstaVerify?</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <i class="fas fa-lock"></i>
+      <h3>Secure</h3>
+      <p>Blockchain-backed storage ensures your documents remain tamper-proof.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-eye"></i>
+      <h3>Transparent</h3>
+      <p>Every verification is recorded on-chain, visible and verifiable by all.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fas fa-bolt"></i>
+      <h3>Instant</h3>
+      <p>Get your credentials verified within seconds, not days.</p>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- New Impact Line -->
+  <p class="impact-line">
+    At <span>InstaVerify</span>, we believe in our promise —
+    <em>"Instantly Verified. Infinitely Trusted."</em>
+  </p>
+
+  <div class="button-group">
+    <a href="GetDocs.html" class="button secondary">I'm a Student</a>
+    <a href="VerifyDocs.html" class="button secondary">I'm a Verifier</a>
+    <a href="UploadDocs.html" class="button secondary">I'm an Institute</a>
+  </div>
+</section>
+
+
+  <footer class="footer">
+  <div class="footer-container">
+    
+    <!-- Brand -->
+    <div class="footer-brand">
+      <img src="logo1.png" alt="InstaVerify Logo" class="footer-logo">
+      <h2>InstaVerify</h2>
+      <p>Secure & Transparent Document Verification using Blockchain.</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>Email: <a href="mailto:support@instaverify.com">support@instaverify.com</a></p>
+      <p>Phone: +91 98765 43210</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 InstaVerify | Built with ❤️ by CodeBusters</p>
+  </div>
+</footer>
+<script>
+  const sections = document.querySelectorAll('.hero-section, .features');
+  const revealOnScroll = () => {
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        section.classList.add('show');
+      }
+    });
+  };
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+</script>
+
 </body>
 </html>
