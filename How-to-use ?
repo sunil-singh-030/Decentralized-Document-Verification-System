@@ -1,3 +1,4 @@
+# clone this github repo into your pc
 # Install MetaMask Extension on your browser
 # Deploy the contract using remix and store the ABI and contract Address
 # replace your ABI and contract Address in js file where ever required
